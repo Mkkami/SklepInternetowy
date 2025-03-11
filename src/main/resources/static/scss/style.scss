@@ -1,0 +1,41 @@
+$bg: #201c29;
+$hover-color: white;
+$text-color: #ab49de;
+$width: 1em;
+    
+  body {
+    background-color: $bg;
+    color: darken(white, 10%);
+      }
+.navbar {
+    background-color: lighten($bg,10%);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+  a {
+        color: $text-color;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 2em;
+        padding: 10px 10px;
+        transition: color 0.3s ease, outline 0.3s ease;
+
+    .login {
+            float: right;
+    }
+    
+    &:hover {
+            color: $hover-color;
+            border-radius: 5px;
+            outline: 1px solid $hover-color;
+    }
+    &:visited{
+            color: $text-color;
+        &:hover {
+            color: $hover-color;
+        }
+        }
+    
+  }
+}

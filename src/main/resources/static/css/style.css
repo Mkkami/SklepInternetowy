@@ -1,0 +1,33 @@
+body {
+  background-color: #201c29;
+  color: #e6e6e6;
+}
+
+.navbar {
+  background-color: #383147;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar a {
+  color: #ab49de;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 2em;
+  padding: 10px 10px;
+  transition: color 0.3s ease, outline 0.3s ease;
+}
+.navbar a .login {
+  float: right;
+}
+.navbar a:hover {
+  color: white;
+  border-radius: 5px;
+  outline: 1px solid white;
+}
+.navbar a:visited {
+  color: #ab49de;
+}
+.navbar a:visited:hover {
+  color: white;
+}/*# sourceMappingURL=style.css.map */

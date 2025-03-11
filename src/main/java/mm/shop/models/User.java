@@ -5,10 +5,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
 @Entity
 @Table(name="users")
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -32,5 +35,15 @@ public class User {
     @NotEmpty
     private String password;
 
+    @Column(name="role")
+    @NotNull
+    @NotEmpty
+    private String role="user"; //user, admin
+
+    public User(String username,String password, String email) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 
 }

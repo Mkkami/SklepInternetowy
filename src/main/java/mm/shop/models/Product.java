@@ -29,4 +29,11 @@ public class Product {
 
     @Column(name = "image")
     private String imageUrl;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "stock")
+    @NotNull
+    private int stock;
 }
