@@ -3,11 +3,16 @@ package mm.shop.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "products")
+//@RequiredArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Column(name = "id")
@@ -27,13 +32,13 @@ public class Product {
     @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "image")
+    @Column(name = "imageUrl")
     private String imageUrl;
 
     @Column(name = "category")
     private String category;
 
-    @Column(name = "stock")
+    @Column(name = "stock", nullable = false)
     @NotNull
     private int stock;
 }
