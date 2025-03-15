@@ -28,10 +28,15 @@ public class User {
     @NotEmpty
     private String email;
 
-    @Column(name="username", unique = true, nullable = false)
+    @Column(name="name", nullable = false)
     @NotNull
     @NotEmpty
-    private String username;
+    private String name;
+
+    @Column(name="surname", nullable = false)
+    @NotNull
+    @NotEmpty
+    private String surname;
 
     @Column(name="password", nullable = false)
     @NotNull
@@ -47,9 +52,10 @@ public class User {
     @ToString.Exclude
     private List<Order> orders;
 
-    public User(String username,String password, String email) {
+    public User(String name, String surname, String password, String email) {
         this.email = email;
-        this.username = username;
+        this.name = name;
+        this.surname = surname;
         this.password = password;
     }
 }

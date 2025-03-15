@@ -43,9 +43,10 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<String> createUserJSON(
             @RequestBody User user) {
-        log.info("Creating new user: " + user.getUsername());
+        log.info("Creating new user: " + user.getEmail());
         UserDTO createdUser = userService.createUser(
-                user.getUsername(),
+                user.getName(),
+                user.getSurname(),
                 user.getPassword(),
                 user.getEmail()
         );

@@ -26,16 +26,13 @@ public class UserService {
     private final UserMapper userMapper;
 
 
-    public UserDTO createUser(String username, String password, String email) {
+    public UserDTO createUser(String name, String surname, String password, String email) {
         if (userRepository.existsByEmail(email)) {
             throw new UserAlreadyExistsException("Email jest już zarejestrowany.");
         }
-        else if (userRepository.existsByUsername(username)) {
-            throw new UserAlreadyExistsException("Nazwa użytkownika jest zajęta.");
-        }
 
         String hashedPassword = passwordEncoder.encode(password);
-        User user = new User(username, hashedPassword, email);
+        User user = new User(name, surname, hashedPassword, email);
         userRepository.save(user);
 
         return userMapper.apply(user);
@@ -48,12 +45,6 @@ public class UserService {
         user.setRole(newRole.toUpperCase());
 
         userRepository.save(user);
-    }
-
-
-    public Optional<UserDTO> findByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .map(userMapper::apply);
     }
 
     public Optional<UserDTO> findById(Long id) {

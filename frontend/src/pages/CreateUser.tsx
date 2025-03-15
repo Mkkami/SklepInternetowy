@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreateUser() {
-    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -17,7 +18,8 @@ function CreateUser() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: username,
+                name: name,
+                surname: surname,
                 email: email,
                 password: password
             })
@@ -39,12 +41,21 @@ function CreateUser() {
             <h2>Utwórz użytkownika</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="username">Nazwa użytkownika</label>
+                    <label htmlFor="name">Imię</label>
                     <input
                         type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="surname">Nazwisko</label>
+                    <input
+                        type="text"
+                        id="surname"
+                        value={surname}
+                        onChange={(e) => setSurname(e.target.value)}
                     />
                 </div>
                 <div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function LoginPage() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
@@ -14,7 +14,7 @@ function LoginPage() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: username,
+                email: email,
                 password: password
             })
         });
@@ -33,12 +33,12 @@ function LoginPage() {
             <h2>Logowanie</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="username">Nazwa użytkownika</label>
+                    <label htmlFor="email">Email</label>
                     <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div>
