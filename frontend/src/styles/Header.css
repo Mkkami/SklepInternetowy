@@ -1,0 +1,38 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #171717;
+  z-index: 1000;
+  float: left;
+  height: 3em;
+}
+.navbar a {
+  color: #ab49de;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  padding: 10px 10px;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+.navbar a .login {
+  float: right;
+}
+.navbar a:hover {
+  color: white;
+}
+.navbar a:visited {
+  color: #ab49de;
+}
+.navbar a:visited:hover {
+  color: white;
+}/*# sourceMappingURL=Header.css.map */

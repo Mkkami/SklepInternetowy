@@ -1,11 +1,11 @@
 package mm.shop.DTO;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
-public class JwtResponse {
+@AllArgsConstructor
+public class AuthResponse {
     private String token;
 }

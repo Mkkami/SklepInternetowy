@@ -30,3 +30,6 @@ server:
 #    path: /user/error
 #    whitelabel:
 #      enabled: false
+security:
+  jwt:
+    secret-key: miemiemiemiemiemiemiemiemiemiemiemiemiemiemie

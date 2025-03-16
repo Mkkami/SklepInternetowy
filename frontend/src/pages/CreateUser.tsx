@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 function CreateUser() {
     const [name, setName] = useState("");
@@ -25,18 +26,20 @@ function CreateUser() {
             })
         });
         if (response.ok) {
-            setMessage('Utworzono użytkownika');
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            setMessage(data.message);
             setTimeout(() => {
                 navigate('/');
             }, 1000); // Przekioerowanie do home po 1 sek
         } else {
-           // setMessage('Błąd podczas tworzenia użytkownika');
-            const errorData = await response.json(); // Dodaj tę linię, aby uzyskać więcej informacji o błędzie
-            setMessage(`Błąd podczas tworzenia użytkownika: ${errorData.message || 'Nieznany błąd'}`);
+            const data = await response.json();
+            setMessage(data.message);
         }
     };
 
     return (
+        <Layout>
         <div>
             <h2>Utwórz użytkownika</h2>
             <form onSubmit={handleSubmit}>
@@ -80,6 +83,7 @@ function CreateUser() {
                 <button type="submit">Utwórz użytkownika</button>
             </form>
         </div>
+        </Layout>
     );
 }
 

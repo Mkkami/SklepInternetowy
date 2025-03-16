@@ -52,6 +52,11 @@ public class UserService {
                 .map(userMapper::apply);
     }
 
+    public Optional<UserDTO> findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(userMapper::apply);
+    }
+
     public List<UserDTO> findAllUsers() {
         return userRepository.findAll()
                 .stream()
