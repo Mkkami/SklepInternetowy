@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -29,6 +31,7 @@ function LoginPage() {
     };
 
     return (
+        <Layout>
         <div>
             <h2>Logowanie</h2>
             <form onSubmit={handleSubmit}>
@@ -54,6 +57,7 @@ function LoginPage() {
                 <button type="submit">Zaloguj się</button>
             </form>
         </div>
+        </Layout>
     );
 }
 

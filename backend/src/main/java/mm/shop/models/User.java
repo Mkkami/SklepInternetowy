@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -15,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name="users")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -43,10 +47,8 @@ public class User {
     @NotEmpty
     private String password;
 
-    @Column(name="role", nullable = false)
-    @NotNull
-    @NotEmpty
-    private String role="user"; //user, admin
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
