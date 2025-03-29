@@ -71,4 +71,12 @@ public class CustomAuthFilter extends UsernamePasswordAuthenticationFilter {
         response.setHeader("access_token", accessToken);
         response.setHeader("refresh_token", refreshToken);
     }
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        log.error("Authentication failed: {}", failed.getMessage());
+
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"error\": \"Invalid username or password\"}");
+    }
 }

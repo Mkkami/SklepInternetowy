@@ -27,11 +27,10 @@ function CreateUser() {
         });
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('token', data.token);
             setMessage(data.message);
             setTimeout(() => {
-                navigate('/');
-            }, 1000); // Przekioerowanie do home po 1 sek
+                navigate('/login');
+            }, 1000); // Przekioerowanie do strony logowania
         } else {
             const data = await response.json();
             setMessage(data.message);
