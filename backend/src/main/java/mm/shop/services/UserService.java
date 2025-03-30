@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
     private final UserMapper userMapper;
 
 
-    public UserDTO createUser(String name, String surname, String password, String email) {
+    public UserDTO createUser(String name, String surname, String password, String email) throws UserAlreadyExistsException  {
         log.info("Creating user: " + email);
         if (userRepository.existsByEmail(email)) {
             throw new UserAlreadyExistsException("Email jest już zarejestrowany.");

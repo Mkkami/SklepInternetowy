@@ -70,6 +70,7 @@ function LoginPage() {
                 </div>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
                 <button type="submit">Zaloguj się</button>
+                <button type="button" onClick={() => navigate('/register')}>Utwórz konto</button>
             </form>
         </div>
         </Layout>

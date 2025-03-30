@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -50,16 +51,22 @@ public class UserController {
     public ResponseEntity<?> createUserJSON(
             @RequestBody User user) {
         log.info("Creating new user: " + user.getEmail());
-        UserDTO createdUser = userService.createUser(
-                user.getName(),
-                user.getSurname(),
-                user.getPassword(),
-                user.getEmail()
-        );
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/user/create").toUriString());
+        log.info(user.getEmail(), user.getName(), user.getSurname());
+        try {
+            UserDTO createdUser = userService.createUser(
+                    user.getName(),
+                    user.getSurname(),
+                    user.getPassword(),
+                    user.getEmail()
+            );
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/api/user/create").toUriString());
 
-        return ResponseEntity.created(uri).body(createdUser);
+            return ResponseEntity.created(uri).body(createdUser);
+        } catch (Exception e) {
+            log.error("Error creating user: " + e.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", "Email jest już zarejestrowany!"));
+        }
     }
     @PostMapping("/user/addRole")
     public ResponseEntity<?> addRoleToUser(
