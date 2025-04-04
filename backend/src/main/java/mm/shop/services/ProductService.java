@@ -20,6 +20,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -43,35 +44,46 @@ public class ProductService {
         productRepo.delete(product);
     }
 
+    private String generateImageUrl(Long id) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/products/image/")
+                .path(String.valueOf(id))
+                .toUriString();
+    }
+
     public String uploadImage(Long id, MultipartFile file) {
         Product product = getProductById(id);
-        String imageUrl = imageFunc.apply(id, file);
+        String imageUrl = saveImageToFileSystem(id, file);
         product.setImageUrl(imageUrl);
         productRepo.save(product);
 
         return imageUrl;
     }
 
-    private final Function<String, String> fileExtension = (filename) -> {
-        return Optional.of(filename).filter(name -> name.contains("."))
-                .map(name -> "." + name.substring(filename.indexOf(".")+1)).orElse(".png");
-    };
-
-    private final BiFunction<Long, MultipartFile, String> imageFunc = (id, image) -> {
+    private String saveImageToFileSystem(Long id, MultipartFile image) {
         String filename = id + fileExtension.apply(image.getOriginalFilename());
         try {
+            // Ścieżka do katalogu z obrazami
             Path fileLocation = Paths.get("").toAbsolutePath().normalize();
 
+            // Sprawdzenie, czy katalog istnieje, jeśli nie, tworzymy go
             if (!Files.exists(fileLocation)) {
                 Files.createDirectories(fileLocation);
             }
 
-            Files.copy(image.getInputStream(), fileLocation.resolve(
-                    id+fileExtension.apply(image.getOriginalFilename())), REPLACE_EXISTING);
+            // Zapisanie obrazu w lokalnym systemie plików
+            Files.copy(image.getInputStream(), fileLocation.resolve(filename), REPLACE_EXISTING);
 
-            return String.valueOf(ServletUriComponentsBuilder.fromCurrentContextPath().path("/products/image/" + filename));
+            // Generowanie URL do obrazu
+            return generateImageUrl(id);
         } catch (Exception ex) {
-            throw new RuntimeException("Unable to save image");
+            throw new RuntimeException("Unable to save image", ex);
         }
+    }
+
+    private final Function<String, String> fileExtension = (filename) -> {
+        return Optional.of(filename).filter(name -> name.contains("."))
+                .map(name -> "." + name.substring(filename.indexOf(".") + 1)).orElse(".png");
     };
+
 }
