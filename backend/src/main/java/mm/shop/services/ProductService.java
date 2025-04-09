@@ -3,6 +3,7 @@ package mm.shop.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mm.shop.models.Product;
 import mm.shop.repositories.ProductRepository;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,9 +25,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
 
 @Service
+@Slf4j
 @Transactional(rollbackOn = Exception.class)
 @RequiredArgsConstructor
 public class ProductService {
+    private static final long MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB limit
     private final ProductRepository productRepo;
 
     public Page<Product> getAllProducts(int page, int size) {
@@ -44,46 +48,21 @@ public class ProductService {
         productRepo.delete(product);
     }
 
-    private String generateImageUrl(Long id) {
-        return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/products/image/")
-                .path(String.valueOf(id))
-                .toUriString();
-    }
+    public void uploadImage(Long id, MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new RuntimeException("File is empty");
+        }
+        if (file.getSize() > MAX_IMAGE_SIZE) {
+            throw new RuntimeException("File size exceeds limit of 1MB");
+        }
 
-    public String uploadImage(Long id, MultipartFile file) {
         Product product = getProductById(id);
-        String imageUrl = saveImageToFileSystem(id, file);
-        product.setImageUrl(imageUrl);
-        productRepo.save(product);
-
-        return imageUrl;
-    }
-
-    private String saveImageToFileSystem(Long id, MultipartFile image) {
-        String filename = id + fileExtension.apply(image.getOriginalFilename());
         try {
-            // Ścieżka do katalogu z obrazami
-            Path fileLocation = Paths.get("").toAbsolutePath().normalize();
-
-            // Sprawdzenie, czy katalog istnieje, jeśli nie, tworzymy go
-            if (!Files.exists(fileLocation)) {
-                Files.createDirectories(fileLocation);
-            }
-
-            // Zapisanie obrazu w lokalnym systemie plików
-            Files.copy(image.getInputStream(), fileLocation.resolve(filename), REPLACE_EXISTING);
-
-            // Generowanie URL do obrazu
-            return generateImageUrl(id);
-        } catch (Exception ex) {
-            throw new RuntimeException("Unable to save image", ex);
+            product.setImage(file.getBytes());
+            product.setImageMimeType(file.getContentType());
+            productRepo.save(product);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to store image data", e);
         }
     }
-
-    private final Function<String, String> fileExtension = (filename) -> {
-        return Optional.of(filename).filter(name -> name.contains("."))
-                .map(name -> "." + name.substring(filename.indexOf(".") + 1)).orElse(".png");
-    };
-
 }

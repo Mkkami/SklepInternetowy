@@ -32,8 +32,9 @@ public class Product {
     @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
+    @Lob
+    @Column(name = "image", nullable = true)
+    private byte[] image;
 
     @Column(name = "category")
     private String category;
@@ -41,4 +42,7 @@ public class Product {
     @Column(name = "stock", nullable = false)
     @NotNull
     private int stock;
+
+    @Column(name = "image_mime_type", nullable = true)
+    private String imageMimeType;
 }

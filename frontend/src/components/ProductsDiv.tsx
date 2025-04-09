@@ -42,9 +42,7 @@ const ProductsDiv: React.FC = () => {
     return (
         <div className="products-div">
             {products.map((product) => (
-                <div key={product.id} className="product-card">
-                    <ProductCard product={product} />
-                </div>
+                <ProductCard key={product.id} product={product} />
             ))}
         </div>
     );
