@@ -38,7 +38,7 @@ public class SecurityConfig{
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session
-                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)     //for JWT
                 )
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/public/**").permitAll()
@@ -64,10 +64,10 @@ public class SecurityConfig{
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Replace with your frontend URL
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setExposedHeaders(List.of("access_token", "refresh_token")); // Expose custom headers
+        configuration.setExposedHeaders(List.of("access_token", "refresh_token"));
         configuration.setAllowCredentials(true); // Optional, only if using cookies
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -28,8 +28,8 @@ function LoginPage() {
             const accessToken = response.headers.get("access_token");
             const refreshToken = response.headers.get("refresh_token");
             if (accessToken) {
-                localStorage.setItem("access_token", accessToken);
-                localStorage.setItem("refresh_token", refreshToken  || '');
+                localStorage.setItem("access_token", accessToken);              // lub sessionStorage
+                localStorage.setItem("refresh_token", refreshToken  || '');     //zapisz w httpOnly
                 console.log("Zapisano access_token:", accessToken);
                 console.log("Zapisano refresh_token:", refreshToken);
             } else {

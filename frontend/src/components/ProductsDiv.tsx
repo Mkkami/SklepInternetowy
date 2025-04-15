@@ -40,7 +40,7 @@ const ProductsDiv: React.FC = () => {
     if (error) return <p className="text-center text-red-500">{error}</p>;
 
     return (
-        <div className="products-div">
+        <div className="product-div">
             {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}
