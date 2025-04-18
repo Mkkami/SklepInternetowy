@@ -10,7 +10,7 @@ type Product = {
     price: number;
     description: string | null;
     stock: number;
-    imageUrl: string;
+    image: string;
     category: string;
 };
 
