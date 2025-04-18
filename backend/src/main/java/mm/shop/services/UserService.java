@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         User user = new User(name, surname, hashedPassword, email);
         userRepository.save(user);
 
-        return userMapper.apply(user);
+        return userMapper.apply(user);      // returns JSON without password
     }
 
     public void addRole(String roleName, String email) {
@@ -86,6 +86,9 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
+
+    //spring security
+    // username == email
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username)
