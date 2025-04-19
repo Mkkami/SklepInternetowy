@@ -52,7 +52,8 @@ public class SecurityConfig{
 //                )
                 .logout(logout -> logout
                         .permitAll())
-                .addFilterBefore(new CustomAuthFilter(authManager, secretKey), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new CustomAuthFilter(authManager, secretKey), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
     return http.build();
     }
 
