@@ -7,8 +7,10 @@ import mm.shop.DTO.UserDTO;
 import mm.shop.DTO.mappers.UserMapper;
 import mm.shop.exceptions.UserAlreadyExistsException;
 import mm.shop.exceptions.UserNotFoundException;
+import mm.shop.models.Cart;
 import mm.shop.models.Role;
 import mm.shop.models.User;
+import mm.shop.repositories.CartRepository;
 import mm.shop.repositories.RoleRepository;
 import mm.shop.repositories.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,6 +36,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
@@ -47,6 +50,10 @@ public class UserService implements UserDetailsService {
         String hashedPassword = passwordEncoder.encode(password);
         User user = new User(name, surname, hashedPassword, email);
         userRepository.save(user);
+
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cartRepository.save(cart);
 
         return userMapper.apply(user);      // returns JSON without password
     }

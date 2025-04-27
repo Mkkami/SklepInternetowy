@@ -1,0 +1,28 @@
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.product-name {
+    flex: 2;
+    font-weight: bold;
+}
+
+.quantity-input {
+    width: 3em;
+    text-align: center;
+}
+
+.total-price {
+    flex: 1;
+    text-align: right;
+    font-weight: bold;
+}
+
+button {
+    padding: 0.5em;
+    margin: 0 0.5em;
+    cursor: pointer;
+}

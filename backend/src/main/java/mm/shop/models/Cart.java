@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,5 +28,5 @@ public class Cart {
         // CASCADE ALL - deleting cart will result in the deletion of every CartItem
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<CartItem> items;
+    private List<CartItem> items = new ArrayList<>();
 }

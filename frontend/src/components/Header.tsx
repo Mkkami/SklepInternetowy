@@ -41,7 +41,9 @@ const Header = () => {
                     <img src={userIcon} className="account-icon" alt="Account" />
                     </Link></a>
             )}
-            <a><img src={cartIcon} className="shopping-cart-icon" alt="Cart" /></a>
+            <a><Link to="/cart">
+                <img src={cartIcon} className="shopping-cart-icon" alt="Cart" />
+                </Link></a>
         </nav>
     );
 };

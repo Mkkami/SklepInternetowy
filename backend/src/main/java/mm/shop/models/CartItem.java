@@ -29,9 +29,22 @@ public class CartItem {
 
     @Column(name="quantity")
     @NotNull
-    private int quantity;
+    private int quantity = 1;
 
     public double getTotalPrice() {
         return product.getPrice() * quantity;
+    }
+
+    public void addQuantity(int quantity) {
+        this.quantity++;
+    }
+
+    public void removeQuantity(int quantity) {
+        this.quantity--;
+    }
+
+    public CartItem(Cart cart, Product product) {
+        this.cart = cart;
+        this.product = product;
     }
 }
