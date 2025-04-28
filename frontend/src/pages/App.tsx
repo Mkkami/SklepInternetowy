@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import '../styles/App.css'
-import Layout from '../components/Layout'
-import ProductsDiv from '../components/ProductsDiv'
+import { useState } from "react";
+import "../styles/App.css";
+import Layout from "../components/Layout";
+import ProductsDiv from "../components/ProductsDiv";
 
 function App() {
-
   return (
     <Layout>
       <main>
@@ -14,4 +13,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mm.shop.DTO.AuthResponse;
 import mm.shop.DTO.UserDTO;
 import mm.shop.exceptions.UserNotFoundException;
 import mm.shop.models.User;

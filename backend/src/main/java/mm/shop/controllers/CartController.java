@@ -48,6 +48,13 @@ public class CartController {
         return ResponseEntity.ok(String.format("Item %d quantity updated to %d.", request.id, request.quantity));
     }
 
+    @DeleteMapping("/item")
+    public ResponseEntity<?> removeFromCart(@RequestBody CartAddRequest request, Principal principal) {
+        String email = principal.getName();
+        log.info("Removing item from cart for user: " + email);
+        return ResponseEntity.ok(String.format("Item %d removed from cart.", request.id));
+    }
+
 
     
 }

@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import Layout from '../components/Layout'
-import CartDiv from '../components/CartDiv'
+import { useState } from "react";
+import Layout from "../components/Layout";
+import CartDiv from "../components/CartDiv";
 
 function Cart() {
-
   return (
     <Layout>
       <main>
@@ -14,4 +13,4 @@ function Cart() {
   );
 }
 
-export default Cart
+export default Cart;

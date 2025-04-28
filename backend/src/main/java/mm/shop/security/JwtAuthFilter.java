@@ -42,9 +42,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 var authToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
-            // Validate the token and set the authentication in the context
-            // For example, you can use JWT library to decode and verify the token
-            // If valid, set the authentication in the SecurityContextHolder
         } catch (Exception e) {
             // Handle token validation failure
             log.warn("JWT decoding failes: {}", e.getMessage());
