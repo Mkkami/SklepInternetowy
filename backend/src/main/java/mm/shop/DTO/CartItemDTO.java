@@ -16,7 +16,6 @@ public class CartItemDTO {
     private double price;
     private byte[] image;
     private String mimeType;
-    private String description;
 
     public void setCartItem(CartItem cartItem) {
         this.id = cartItem.getId();
@@ -28,6 +27,5 @@ public class CartItemDTO {
         this.price = product.getPrice();
         this.image = product.getImage();
         this.mimeType = product.getImageMimeType();
-        this.description = product.getDescription();
     }
 }

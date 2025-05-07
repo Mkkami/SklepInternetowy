@@ -9,6 +9,7 @@ import mm.shop.repositories.CartItemRepository;
 import mm.shop.repositories.CartRepository;
 import mm.shop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,7 @@ public class CartService {
         cartItemRepository.deleteByProductIdAndCartId(productId, cartId);
     }
 
+    @Transactional(readOnly = true)
     public List<CartItemDTO> getCartItems(Long cartId) {
         // Check if the cart exists
         if (!cartRepository.existsById(cartId)) {
@@ -71,6 +73,7 @@ public class CartService {
             CartItemDTO cartItemDTO = new CartItemDTO();
             cartItemDTO.setCartItem(cartItem);
             cartItemDTO.setProduct(product);
+            items.add(cartItemDTO);
         }
 
         return items;

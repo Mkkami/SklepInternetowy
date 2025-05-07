@@ -40,7 +40,7 @@ const Header = () => {
             Witaj {user.name} {user.surname}
           </Link>
       ) : (
-          <Link to="/login">
+          <Link to="/login" id="login-icon">
             <img src={userIcon} className="account-icon" alt="Account" />
           </Link>
       )}

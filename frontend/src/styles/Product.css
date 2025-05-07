@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(200px, 1fr));
   grid-auto-flow: dense;
-  gap: 1em;
+  gap: 3em;
   padding: 1em;
   max-width: 1600px;
   margin: 0 auto;
@@ -66,4 +66,4 @@
 .product-card .product-footer .product-price {
   font-size: 1em;
   color: white;
-}/*# sourceMappingURL=Product.css.map */
+}

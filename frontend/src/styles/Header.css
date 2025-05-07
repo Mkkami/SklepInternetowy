@@ -19,6 +19,7 @@
   padding: 10px 10px;
   transition: color 0.3s ease;
 }
+
 .navbar a .login {
   float: right;
 }
@@ -30,4 +31,4 @@
 }
 .navbar a:visited:hover {
   color: white;
-}/*# sourceMappingURL=Header.css.map */
+}

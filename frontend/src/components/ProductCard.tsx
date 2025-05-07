@@ -20,23 +20,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const navigate = useNavigate();
   const handleAddToCart = async () => {
     const token = localStorage.getItem("access_token");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
+      if (!token) {
+        navigate("/login");
+        return;
+      }
 
-    try {
-      const response = await fetch("http://localhost:8080/cart", {
-        // cart/add
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          productId: product.id,
-          quantity: 1,
-        }),
+      try {
+        const response = await fetch("http://localhost:8080/cart", {
+          // cart/add
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            id: product.id,
+            quantity: 1,
+          }),
       });
 
       if (!response.ok) {

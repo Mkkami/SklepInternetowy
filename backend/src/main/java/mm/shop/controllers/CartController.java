@@ -38,6 +38,9 @@ public class CartController {
     public ResponseEntity<?> addToCart(@RequestBody CartAddRequest request, Principal principal) {
         String email = principal.getName();
         log.info("Adding item to cart for user: " + email);
+        Cart cart = cartService.getCartByUserEmail(email);
+        log.info("Cart ID: " + cart.getId() + ", Product ID: " + request.id + ", Quantity: " + request.quantity);
+        cartService.addToCart(request.id, cart.getId(), request.quantity);
         return ResponseEntity.ok(String.format("Item %d added to cart.", request.id));
     }
 
