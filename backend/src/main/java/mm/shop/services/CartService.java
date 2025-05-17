@@ -43,19 +43,31 @@ public class CartService {
         return updatedCart;
     }
 
-    public void removeFromCart(Long productId, Long cartId) {
-        // Check if the product exists
-        if (!productRepository.existsById(productId)) {
-            throw new RuntimeException("Product not found");
-        }
+    @Transactional
+    public void updateQuantity(Long id, int quantity) {
 
-        // Check if the cart exists
+
+        // Update the quantity of the product in the cart
+        CartItem cartItem = cartItemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found in cart"));
+        cartItem.setQuantity(quantity);
+        cartItemRepository.save(cartItem);
+    }
+
+    @Transactional
+    public void removeFromCart(Long id) {
+        cartItemRepository.deleteById(id);
+    }
+
+    private void checkIfCartExists(Long cartId) {
         if (!cartRepository.existsById(cartId)) {
             throw new RuntimeException("Cart not found");
         }
-
-        // Remove the product from the cart
-        cartItemRepository.deleteByProductIdAndCartId(productId, cartId);
+    }
+    private void checkIfProductExists(Long productId) {
+        if (!productRepository.existsById(productId)) {
+            throw new RuntimeException("Product not found");
+        }
     }
 
     @Transactional(readOnly = true)

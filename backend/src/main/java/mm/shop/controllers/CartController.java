@@ -48,6 +48,9 @@ public class CartController {
     public ResponseEntity<?> updateQuantity(@RequestBody CartAddRequest request, Principal principal) {
         String email = principal.getName();
         log.info("Updating item quantity in cart for user: " + email);
+        log.info("Product ID: " + request.id + ", Quantity: " + request.quantity);
+        Cart cart = cartService.getCartByUserEmail(email);
+        cartService.updateQuantity(request.id, request.quantity);
         return ResponseEntity.ok(String.format("Item %d quantity updated to %d.", request.id, request.quantity));
     }
 
@@ -55,11 +58,11 @@ public class CartController {
     public ResponseEntity<?> removeFromCart(@RequestBody CartAddRequest request, Principal principal) {
         String email = principal.getName();
         log.info("Removing item from cart for user: " + email);
+        Cart cart = cartService.getCartByUserEmail(email);
+        cartService.removeFromCart(request.id);
         return ResponseEntity.ok(String.format("Item %d removed from cart.", request.id));
     }
 
-
-    
 }
 @Data
 @NoArgsConstructor
