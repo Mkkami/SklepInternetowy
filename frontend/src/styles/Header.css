@@ -20,9 +20,27 @@
   transition: color 0.3s ease;
 }
 
-.navbar a .login {
+img {
+  width: 1.5em;
+  height: 1.5em;
+  color: #ab49de;
+}
+.navbar div {
+  color: #ab49de;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  padding: 10px 10px;
+  transition: color 0.3s ease;
+}
+
+.navbar .profile-items {
   float: right;
 }
+
+/* .navbar a .login {
+  float: right;
+} */
 .navbar a:hover {
   color: white;
 }

@@ -67,3 +67,9 @@
   font-size: 1em;
   color: white;
 }
+
+.product-card .product-footer button {
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}

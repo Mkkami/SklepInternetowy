@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Product.css";
 import { useNavigate } from "react-router-dom";
+import cartAdd from "../assets/cart-add.svg";
 
 type Product = {
   id: number;
@@ -59,9 +60,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img src={imageSrc} alt={"Brak obrazu"} />
       </div>
       <h3 className="product-name">{product.name}</h3>
-      <span className="product-price">Price: ${product.price}</span>
-      {/* <p>Stock: {product.stock}</p> */}
-      <button onClick={handleAddToCart}>+</button>
+      <div className="product-footer">
+        <span className="product-price">Price: ${product.price}</span>
+        {/* <p>Stock: {product.stock}</p> */}
+        {/* <img className="cart-add-btn" src={cartAdd} onClick={handleAddToCart}></img> */}
+        <button className="cart-add-btn" onClick={handleAddToCart}>
+          <img src={cartAdd} alt="Add to cart" />
+        </button>
+      </div>
     </div>
   );
 };

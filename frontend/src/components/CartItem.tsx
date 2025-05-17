@@ -90,7 +90,6 @@ const CartItem = ({ item }: { item: Item }) => {
       if (!response.ok) {
         throw new Error("Failed to update quantity");
       }
-      alert("Updated quantity");
     } catch (error) {
       console.error("Error updating quantity:", error);
       alert("Failed to update quantity");

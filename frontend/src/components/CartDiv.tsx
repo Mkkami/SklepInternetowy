@@ -43,7 +43,10 @@ const CartDiv: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setItems(response.data);
+      const sortedItems = response.data.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setItems(sortedItems);
       setLoading(false);
     } catch (error) {
       console.error("Blad koszyka: ", error);
@@ -73,7 +76,7 @@ const CartDiv: React.FC = () => {
           <p>Loading...</p>
         ) : (
           //false
-          items.map((item: Item) => <CartItem key={item.id} item={item} />)
+          items.map((item: Item) => <CartItem key={item.id} item={item}/>)
         )}
       </div>
       <h3></h3>

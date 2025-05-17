@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
-import cartIcon from "../assets/shopping-cart.svg";
+import cartIcon from "../assets/cart.svg";
 import userIcon from "../assets/account.svg";
 
 const Header = () => {
@@ -35,18 +35,14 @@ const Header = () => {
   return (
     <nav className="navbar">
         <Link to="/">Home</Link>
-      {user ? (
-          <Link to="/profile">
-            Witaj {user.name} {user.surname}
-          </Link>
-      ) : (
+        <div className="profile-items">
           <Link to="/login" id="login-icon">
             <img src={userIcon} className="account-icon" alt="Account" />
           </Link>
-      )}
-        <Link to="/cart">
-          <img src={cartIcon} className="shopping-cart-icon" alt="Cart" />
-        </Link>
+          <Link to="/cart">
+            <img src={cartIcon} className="shopping-cart-icon" alt="Cart" />
+          </Link>
+        </div>
     </nav>
   );
 };
