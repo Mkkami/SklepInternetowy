@@ -4,6 +4,9 @@ import "../styles/Cart.css"; // You'll need to create this CSS file
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { checkToken } from "../services/CheckToken";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
+import { showToast } from "../services/Toast";
 
 type Item = {
   id: number;
@@ -79,9 +82,11 @@ const CartDiv: React.FC = () => {
           items.map((item: Item) => <CartItem key={item.id} item={item}/>)
         )}
       </div>
-      <h3></h3>
+      <div className="cart-total">
+        <span>Total: {calculateTotal()} zł</span>
+        <button onClick={() => showToast("Buying not there yet")}>Buy</button>
+      </div>
     </div>
   );
 };
-
 export default CartDiv;

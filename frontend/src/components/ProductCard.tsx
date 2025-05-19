@@ -2,6 +2,9 @@ import React from "react";
 import "../styles/Product.css";
 import { useNavigate } from "react-router-dom";
 import cartAdd from "../assets/cart-add.svg";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
+import { showToast } from "../services/Toast";
 
 type Product = {
   id: number;
@@ -48,12 +51,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         }
       }
 
-      alert("Product added to cart!");
+      showToast("Product added to cart!");
     } catch (error) {
       console.error("Error adding product to cart:", error);
-      alert("Failed2 to add product to cart");
-    }
-  };
+      showToast("Product already in cart");
+    }};
   return (
     <div className="product-card">
       <div className="product-image">
