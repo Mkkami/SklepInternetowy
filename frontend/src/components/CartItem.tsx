@@ -127,22 +127,25 @@ const handleDecreaseQuantity = async () => {
 
   return (
     <div className="cart-item">
-      <span className="cart-item-name">{item.name}</span>
-      <button onClick={handleDecreaseQuantity}>-</button>
-      <input
-        type="number"
-        value={tempQuantity}
-        onChange={handleInputChange}
-        onKeyDown={handleInputKeyDown}
-        onBlur={handleInputBlur}
-        className="quantity-input"
-        style={{ MozAppearance: "textfield" }}
-        inputMode="numeric"
-        pattern="[0-9]*"
-        autoComplete="off"
-        min="1"
-      />
-      <button onClick={handleIncreaseQuantity}>+</button>
+      <span className="product-name">{item.name}</span>
+      <div className="quantity">
+        <button onClick={handleDecreaseQuantity}>-</button>
+        <input
+          type="number"
+          value={tempQuantity}
+          onChange={handleInputChange}
+          onKeyDown={handleInputKeyDown}
+          onBlur={handleInputBlur}
+          className="quantity-input"
+          style={{ MozAppearance: "textfield" }}
+          inputMode="numeric"
+          pattern="[0-9]*"
+          autoComplete="off"
+          min="1"
+        />
+        <button onClick={handleIncreaseQuantity}>+</button>
+      </div>
+      <span className="single-price">${item.price}</span>
       <span className="total-price">${totalPrice}</span>
       <button className="trash" onClick={handleRemoveFromCart}>
           <img src={trashIcon} alt="TRASH" />

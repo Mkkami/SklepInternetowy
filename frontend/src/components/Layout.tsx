@@ -5,7 +5,7 @@ const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
     <div>
       <Header />
-      <main style={{ paddingTop: "60px" }}>{children}</main>
+      <main style={{ paddingTop: "10px" }}>{children}</main>
     </div>
   );
 };

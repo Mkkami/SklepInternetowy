@@ -1,0 +1,11 @@
+.cart-total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+}
+
+.cart-total span {
+  font-weight: bold;
+  font-size: 18px;
+}

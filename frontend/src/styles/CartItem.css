@@ -1,18 +1,40 @@
 .cart-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 1em;
+  border-bottom: 1px solid white;
+  gap: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .product-name {
   flex: 2;
   font-weight: bold;
+  min-width: 150px;
+  width: 150px;
+  text-align: left;
+}
+
+.quantity {
+  display: flex;
+  gap: 1em;
+  padding-right: 1em;
 }
 
 .quantity-input {
-  width: 3em;
+  width: 2em;
   text-align: center;
+  border: 1px solid #7c7c7c;
+  border-radius: 2px;
+}
+
+.single-price {
+  flex: 1;
+  text-align: center;
+  /* padding-left: 1em; */
 }
 
 .total-price {
@@ -21,8 +43,13 @@
   font-weight: bold;
 }
 
-button {
-  padding: 0.5em;
-  margin: 0 0.5em;
+.cart-item button {
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid white; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
 }
