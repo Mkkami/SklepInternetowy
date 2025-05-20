@@ -6,6 +6,8 @@ import App from "./pages/App.tsx";
 import CreateUser from "./pages/CreateUser.tsx";
 import Login from "./pages/Login.tsx";
 import Cart from "./pages/Cart.tsx";
+import CreateProduct from "./pages/CreateProduct.tsx";
+import ProtectedRoute from "./services/ProtectedRoute.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -15,6 +17,13 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/register" element={<CreateUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        {/* <Route path="/create-product" element={<CreateProduct />} /> */}
+        <Route
+          path="/create-product"
+          element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <CreateProduct />
+            </ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>

@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 import "../styles/Cart.css"; // You'll need to create this CSS file
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { checkToken } from "../services/CheckToken";
+import { checkToken } from "../services/Token";
 import "toastify-js/src/toastify.css";
 import { showToast } from "../services/Toast";
 

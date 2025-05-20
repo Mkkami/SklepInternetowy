@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/CartItem.css";
 import { useNavigate } from "react-router-dom";
-import { checkToken } from "../services/CheckToken";
+import { checkToken } from "../services/Token";
 import { showToast } from "../services/Toast";
 import trashIcon from "../assets/trash.svg";
 

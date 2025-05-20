@@ -1,62 +1,39 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { checkTokenWithoutRedirecting, getRolesFromToken } from "../services/Token";
 
-const isTokenExpired = (token: string): boolean => {
-  const payload = JSON.parse(atob(token.split(".")[1]));
-  const currentTime = Math.floor(Date.now() / 1000);
-  return payload.exp < currentTime;
-};
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+  requiredRole: string;
+}
 
-const ProtectedRoute = () => {
-  const [authChecked, setAuthChecked] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRole }) => {
+  const [token, setToken] = useState<string | null>(null);
+  const [roles, setRoles] = useState<string[] | null>(null); // null means "not loaded yet"
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const accessToken = localStorage.getItem("access_token");
-
-      if (!accessToken) {
-        setIsAuthenticated(false);
-        setAuthChecked(true);
-        return;
+    async function fetchToken() {
+      const t = await checkTokenWithoutRedirecting();
+      setToken(t);
+      if (t) {
+        const r = getRolesFromToken(t);
+        setRoles(r);
+      } else {
+        setRoles([]); // no token, no roles
       }
-
-      if (!isTokenExpired(accessToken)) {
-        setIsAuthenticated(true);
-        setAuthChecked(true);
-        return;
-      }
-
-      try {
-        const res = await fetch("http://localhost:8080/refresh-token", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            refreshToken: localStorage.getItem("refresh_token"),
-          }),
-        });
-
-        if (!res.ok) throw new Error("Refresh failed");
-        const data = await res.json();
-        localStorage.setItem("access_token", data.access_token);
-        setIsAuthenticated(true);
-      } catch (err) {
-        setIsAuthenticated(false);
-      } finally {
-        setAuthChecked(true);
-      }
-    };
-
-    checkAuth();
+    }
+    fetchToken();
   }, []);
 
-  if (!authChecked) {
-    return <div>Loading...</div>; // or a spinner
+  if (roles === null) {
+    return null;
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  if (!roles.includes(requiredRole)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

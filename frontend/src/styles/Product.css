@@ -2,12 +2,13 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(200px, 1fr));
   grid-auto-flow: dense;
-  gap: 3em;
+  gap: 2em;
   padding: 1em;
   max-width: 1600px;
   margin: 0 auto;
   overflow-x: auto;
   direction: ltr;
+  margin-top: 7em;
 }
 @media (max-width: 1400px) {
   .product-div {
@@ -32,13 +33,13 @@
 
 .product-card {
   border-radius: 5px;
-  padding: 1em;
-  margin: 1em;
+  padding: 0.5em;
+  margin: 0em;
   text-align: center;
   background-color: #171717;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-width: 20em;
-  max-height: 30em;
+  max-width: 15em;
+  max-height: 25em;
   width: 100%;
 }
 .product-card:hover {

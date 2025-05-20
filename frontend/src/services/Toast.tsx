@@ -10,4 +10,5 @@ export function showToast(text: string, options?: Partial<Toastify.Options>) {
     // backgroundColor: "#ab49de",
     ...options, // allow overrides
   }).showToast();
-}
+}  
+export default showToast;
