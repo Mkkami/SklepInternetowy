@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import mm.shop.models.Product;
 import mm.shop.services.ProductService;
+import mm.shop.services.StripeService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,8 +25,11 @@ public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    private final StripeService stripeService;
+
+    public ProductController(ProductService productService, StripeService stripeService) {
         this.productService = productService;
+        this.stripeService = stripeService;
     }
 
     @GetMapping("/products/{page}")
@@ -82,6 +86,11 @@ public class ProductController {
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Błąd podczas zapisu pliku");
         }
+        try {
+            stripeService.createProduct(product);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Błąd podczas tworzenia produktu w Stripe: " + e.getMessage());
+        }
 
         productService.createProduct(product);
         return ResponseEntity.ok("Produkt został dodany pomyślnie");
@@ -107,6 +116,7 @@ public class ProductController {
     @DeleteMapping("/product/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         Product product = productService.getProductById(id);
+        stripeService.removeProduct(product);
         productService.deleteProduct(product);
         return ResponseEntity.ok("Produkt został usunięty pomyślnie");
     }

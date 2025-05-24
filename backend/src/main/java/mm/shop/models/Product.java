@@ -45,4 +45,10 @@ public class Product {
 
     @Column(name = "image_mime_type", nullable = true)
     private String imageMimeType;
+
+    @Column(name = "stripe_product_id")
+    private String stripeProductId;
+
+    @Column(name = "stripe_price_id")
+    private String stripePriceId;
 }
