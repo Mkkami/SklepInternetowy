@@ -47,30 +47,8 @@ public class ProductController {
         return ResponseEntity.ok(createdProduct);
     }
 
-//    @PostMapping("/product/createNew")
-//    public ResponseEntity<String> createProduct(
-//            @RequestBody Product product,
-//            @RequestParam("file") MultipartFile file,
-//            Principal principal) {
-//        if (!List.of("image/jpeg", "image/png", "image/gif", "image/jpg").contains(file.getContentType())) {
-//            return ResponseEntity.badRequest().body("Dozwolone tylko typy obrazów: JPEG, PNG, GIF, JPG");
-//        }
-//        log.info("Creating new product: " + product.getName());
-//        log.info("User email: " + principal.getName());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        boolean isAdmin = authentication.getAuthorities().stream()
-//                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"));
-//        log.info("authentication: " + authentication.getAuthorities().stream());
-//        if (!isAdmin) {
-//            return ResponseEntity.status(403).body("Nie masz uprawnień do dodawania produktów");
-//        }
-//        productService.createProduct(product);
-//        productService.uploadImage(product.getId(), file);
-//        return ResponseEntity.ok("Produkt został dodany pomyślnie");
-//    }
-
-        @PostMapping("/product/createNew")
-        @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/product/createNew")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> createProduct(
             @RequestPart("product") String productJson,
             @RequestPart("file") MultipartFile file

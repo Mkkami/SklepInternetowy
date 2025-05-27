@@ -10,7 +10,9 @@ import mm.shop.models.CartItem;
 import mm.shop.models.Product;
 import mm.shop.services.CartService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -52,6 +54,16 @@ public class CartController {
         Cart cart = cartService.getCartByUserEmail(email);
         cartService.updateQuantity(request.id, request.quantity);
         return ResponseEntity.ok(String.format("Item %d quantity updated to %d.", request.id, request.quantity));
+    }
+
+    @Transactional
+    @DeleteMapping()
+    public ResponseEntity<?> removeAllItemsFromCart(Principal principal) {
+        String email = principal.getName();
+        log.info("Removing all items from cart for user: " + email);
+        Cart cart = cartService.getCartByUserEmail(email);
+        cartService.deleteCartItems(cart.getId());
+        return ResponseEntity.ok("All items removed from cart.");
     }
 
     @DeleteMapping("/item")

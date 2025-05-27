@@ -1,0 +1,9 @@
+.stripe-card-element {
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  padding: 16px 12px;
+  margin-bottom: 16px;
+  font-size: 20px;
+  width: 100%;
+}

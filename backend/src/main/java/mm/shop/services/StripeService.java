@@ -2,16 +2,21 @@ package mm.shop.services;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
 import com.stripe.param.PriceCreateParams;
 import com.stripe.param.ProductCreateParams;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mm.shop.models.Cart;
+import mm.shop.models.CartItem;
 import mm.shop.models.Product;
+import mm.shop.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -21,6 +26,8 @@ public class StripeService {
 
     @Value("${stripe.secret.key}")
     private String stripeSecretKey;
+
+    private final CartRepository cartRepository;
 
     @PostConstruct
     public void init() {
@@ -61,6 +68,27 @@ public class StripeService {
         } catch (StripeException e) {
             log.error("Error deactivating Stripe product: " + e.getMessage());
         }
+    }
+
+    public PaymentIntent createPaymentIntent(Cart cart) throws StripeException {
+        // Calculate total amount from cart items
+        double totalAmount = cart.getItems().stream()
+                .mapToDouble(CartItem::getTotalPrice)
+                .sum();
+
+        String productNames = cart.getItems().stream()
+                .map(item -> item.getProduct().getName())
+                .reduce((name1, name2) -> name1 + ", " + name2)
+                .orElse("");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("amount", (int)(totalAmount * 100)); // Convert to cents
+        params.put("currency", "pln");
+        params.put("description", "Purchase from Your Shop - Cart ID: " + cart.getId());
+        params.put("metadata", Map.of("products", productNames));
+        params.put("payment_method_types", List.of("card"));
+
+        return PaymentIntent.create(params);
     }
 
 

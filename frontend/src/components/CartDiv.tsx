@@ -1,90 +1,14 @@
-import React, { useEffect, useState } from "react";
-import CartItem from "./CartItem";
-import "../styles/Cart.css"; // You'll need to create this CSS file
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { checkToken } from "../services/Token";
-import "toastify-js/src/toastify.css";
-import { showToast } from "../services/Toast";
+import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CartDivBody from "./CartDivBody";
 
-type Item = {
-  id: number;
-  name: string;
-  image: string;
-  quantity: number;
-  price: number;
-  description: string | null;
-  mimeType: string;
-};
+const stripePromise = loadStripe("pk_test_51RRX2ZFl2le9G44BDRkqFfPVTZyT6nhTHytV2319oyMRs5UfKfJNoBWVmbzRj2hNz19A1LlBeByqpCWEnx558o8D00JRA6PJuj");
 
-// type CartProps = {
-//     items: Item[];
-//     onItemRemoved: (itemId: number) => void;
-//     onQuantityUpdated: (itemId: number, newQuantity: number) => void;
-// };
+const CartDiv: React.FC = () => (
+  <Elements stripe={stripePromise}>
+    <CartDivBody />
+  </Elements>
+);
 
-const CartDiv: React.FC = () => {
-  const navigate = useNavigate();
-  const [items, setItems] = useState<Item[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [token, setToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchToken() {
-      setToken(await checkToken(navigate));
-    }
-
-    fetchToken();
-  }, [navigate]);
-
-  const fetchCart = async () => {
-    if (!token) return;
-    try {
-      const response = await axios.get<Item[]>("http://localhost:8080/cart", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const sortedItems = response.data.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
-      setItems(sortedItems);
-      setLoading(false);
-    } catch (error) {
-      console.error("Blad koszyka: ", error);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCart();
-  }, [token]);
-
-  const calculateTotal = () => {
-    return items
-      .reduce(
-        (total: number, item: Item) => total + item.price * item.quantity,
-        0
-      )
-      .toFixed(2);
-  };
-
-  return (
-    <div className="cart-container">
-      <div>
-        {loading ? (
-          //true
-          <p>Loading...</p>
-        ) : (
-          //false
-          items.map((item: Item) => <CartItem key={item.id} item={item}/>)
-        )}
-      </div>
-      <div className="cart-total">
-        <span>Total: {calculateTotal()} zł</span>
-        <button onClick={() => showToast("Buying not there yet")}>Buy</button>
-      </div>
-    </div>
-  );
-};
 export default CartDiv;

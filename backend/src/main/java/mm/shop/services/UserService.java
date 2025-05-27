@@ -93,6 +93,10 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
+    public Optional<User> findByEmailRaw(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
     //spring security
     // username == email

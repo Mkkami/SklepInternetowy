@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import showToast from "../services/Toast";
 import "toastify-js/src/toastify.css";
 import "../styles/ProductForm.css";
+import "../styles/PaymentForm.css"
 
 type Product = {
   name: string;

@@ -6,41 +6,39 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@Data
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
+@Data
 @NoArgsConstructor
-//@RequiredArgsConstructor
 public class Order {
 
     @Id
-    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-
-    @ManyToMany
-    @JoinTable(
-            name="order_products",
-            joinColumns = @JoinColumn(name="order_id"),
-            inverseJoinColumns = @JoinColumn(name="product_id")
-    )
-    @ToString.Exclude
-    private List<Product> product;
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @PrePersist
     protected void createDate() {
-        orderDate = new Date();
+        if (orderDate == null) {
+            orderDate = LocalDateTime.now();
+        }
     }
+
+    @Column(name = "status")
+    private String status; // "PENDING", "PAID", "DELIVERED", "CANCELLED"
+
 }
+

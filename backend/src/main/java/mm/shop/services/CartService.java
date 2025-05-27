@@ -70,6 +70,19 @@ public class CartService {
         }
     }
 
+    public void deleteCartItems(Long cartId) {
+        // Check if the cart exists
+        if (!cartRepository.existsById(cartId)) {
+            throw new RuntimeException("Cart not found");
+        }
+
+        // Delete all items in the cart
+        List<CartItem> cartItems = cartItemRepository.findByCartId(cartId);
+        for (CartItem item : cartItems) {
+            cartItemRepository.delete(item);
+        }
+    }
+
     @Transactional(readOnly = true)
     public List<CartItemDTO> getCartItems(Long cartId) {
         // Check if the cart exists
