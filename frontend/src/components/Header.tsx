@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import cartIcon from "../assets/cart.svg";
 import userIcon from "../assets/account.svg";
+import homeIcon from "../assets/home.svg";
 import { checkToken, checkTokenWithoutRedirecting, getRolesFromToken } from "../services/Token";
 
 const Header = () => {
@@ -29,7 +30,9 @@ const Header = () => {
 
   return (
     <nav className="navbar">
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <img src={homeIcon} className="home-icon" alt="Home" />
+        </Link>
         {isAdmin && <Link to="/create-product">Create Product</Link>}
         <div className="profile-items">
           <Link to="/login" id="login-icon">
