@@ -51,7 +51,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ token, onSuccess, onCancel })
     <form onSubmit={handlePayment} style={{ marginTop: "1em" }}>
       <CardElement className="stripe-card-element" />
       <button type="submit" disabled={paying || !stripe}>
-        {paying ? "Processing..." : "Confirm payment"}
+        {paying ? "Processing..." : "Potwierdź płatność"}
       </button>
       <button
         type="button"
@@ -59,7 +59,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ token, onSuccess, onCancel })
         disabled={paying}
         style={{ marginLeft: "1em" }}
       >
-        Cancel
+        Anuluj
       </button>
     </form>
   );

@@ -16,7 +16,7 @@ const ProductForm: React.FC = () => {
   const [product, setProduct] = useState<Product>({
     name: "",
     price: 0,
-    stock: 0,
+    stock: 1,
     description: "",
     category: ""
   });
@@ -81,9 +81,9 @@ const ProductForm: React.FC = () => {
 
   return (
     <form className="product-form" onSubmit={handleSubmit}>
-      <h2 style={{ color: "#ab49de" }}>Add New Product</h2>
+      <h2 style={{ color: "#ab49de" }}>Dodaj nowy produkt</h2>
       <label>
-        Name*:
+        Nazwa*:
         <input 
           type="text" 
           name="name"
@@ -93,7 +93,7 @@ const ProductForm: React.FC = () => {
         />
       </label>
       <label>
-        Price*:
+        Cena*:
         <input 
           type="number" 
           name="price"
@@ -105,7 +105,7 @@ const ProductForm: React.FC = () => {
         />
       </label>
       <label>
-        Description:
+        Opis:
         <textarea 
           name="description"
           value={product.description} 
@@ -114,7 +114,7 @@ const ProductForm: React.FC = () => {
         />
       </label>
       <label>
-        Category:
+        Kategoria:
         <input 
           type="text" 
           name="category"
@@ -122,7 +122,7 @@ const ProductForm: React.FC = () => {
           onChange={handleChange} 
         />
       </label>
-      <label>
+      {/* <label>
         Stock*:
         <input 
           type="number" 
@@ -132,9 +132,9 @@ const ProductForm: React.FC = () => {
           min="0" 
           required 
         />
-      </label>
+      </label> */}
       <label>
-        Image*:
+        Obraz*:
         <input 
           id="product-image-input" 
           type="file" 
@@ -157,7 +157,7 @@ const ProductForm: React.FC = () => {
           marginTop: "1em" 
         }}
       >
-        Add Product
+        Dodaj produkt
       </button>
     </form>
   );

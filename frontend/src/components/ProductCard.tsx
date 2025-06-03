@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/Product.css";
 import { useNavigate } from "react-router-dom";
 import cartAdd from "../assets/cart-add.svg";
-import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 import { showToast } from "../services/Toast";
 
@@ -58,14 +57,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }};
   return (
     <div className="product-card">
-      <div className="product-image">
-        <img src={imageSrc} alt={"Brak obrazu"} />
-      </div>
-      <h3 className="product-name">{product.name}</h3>
+      <img src={imageSrc} alt={"Brak obrazu"} className="product-image" />
+      <div className="product-name">{product.name}</div>
       <div className="product-footer">
-        <span className="product-price">Price: ${product.price}</span>
-        {/* <p>Stock: {product.stock}</p> */}
-        {/* <img className="cart-add-btn" src={cartAdd} onClick={handleAddToCart}></img> */}
+      <div className="product-price">Cena: zł{product.price}</div>
         <button className="cart-add-btn" onClick={handleAddToCart}>
           <img src={cartAdd} alt="Add to cart" />
         </button>

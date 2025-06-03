@@ -145,8 +145,8 @@ const handleDecreaseQuantity = async () => {
         />
         <button onClick={handleIncreaseQuantity}>+</button>
       </div>
-      <span className="single-price">${item.price}</span>
-      <span className="total-price">${totalPrice}</span>
+      <span className="single-price">zł{item.price}</span>
+      <span className="total-price">zł{totalPrice}</span>
       <button className="trash" onClick={handleRemoveFromCart}>
           <img src={trashIcon} alt="TRASH" />
         </button>

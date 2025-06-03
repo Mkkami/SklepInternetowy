@@ -84,10 +84,10 @@ const CartDivBody: React.FC = () => {
       </div>
       <div className='cart-container'>
         <div className="cart-total">
-          <span>Total: {calculateTotal()} zł</span>
+          <span>Do zapłaty: {calculateTotal()} zł</span>
           {!showPaymentForm ? (
             <button onClick={handleBuy} disabled={!token}>
-              Buy
+              Kup
             </button>
           ) : (
             token && (

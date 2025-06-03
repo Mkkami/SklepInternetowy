@@ -33,14 +33,16 @@ const Header = () => {
         <Link to="/">
           <img src={homeIcon} className="home-icon" alt="Home" />
         </Link>
-        {isAdmin && <Link to="/create-product">Create Product</Link>}
+        {isAdmin && <Link to="/create-product">Nowy produkt</Link>}
         <div className="profile-items">
           <Link to="/login" id="login-icon">
             <img src={userIcon} className="account-icon" alt="Account" />
           </Link>
-          <Link to="/cart">
-            <img src={cartIcon} className="shopping-cart-icon" alt="Cart" />
-          </Link>
+          {token && (
+            <Link to="/cart">
+              <img src={cartIcon} className="shopping-cart-icon" alt="Cart" />
+            </Link>
+          )}
         </div>
     </nav>
   );

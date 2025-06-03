@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { jwtDecode } from "jwt-decode";
+import "../styles/Login.css";
 
 interface DecodedToken {
   sub: string;
