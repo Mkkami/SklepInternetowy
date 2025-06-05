@@ -1,0 +1,72 @@
+.admin-products-table {
+  width: 100%;
+  color: #fff;
+  border-collapse: collapse;
+}
+
+.admin-products-table th,
+.admin-products-table td {
+  padding: 0.7em 1em;
+  border-bottom: 1px solid #333;
+  text-align: left;
+    vertical-align: middle;
+}
+
+.admin-products-table th.id,
+.admin-products-table td.id {
+  width: 5%;
+  min-width: 40px;
+}
+
+.admin-products-table th.name,
+.admin-products-table td.name {
+  width: 30%;
+  min-width: 200px;
+}
+
+.admin-products-table th.price,
+.admin-products-table td.price {
+  width: 12%;
+  min-width: 80px;
+}
+
+.admin-products-table th.category,
+.admin-products-table td.category {
+  width: 18%;
+  min-width: 100px;
+}
+
+.admin-products-table th.stock,
+.admin-products-table td.stock {
+  width: 10%;
+  min-width: 60px;
+}
+
+.admin-products-table th.actions,
+.admin-products-table td.actions {
+  width: 20%;
+  min-width: 100px;
+  /* display: flex; */
+}
+
+.admin-products-table button {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3em 1.2em;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.admin-products-table .edit-btn {
+  background: #1976d2;
+  margin-bottom: 0.2em;
+}
+
+.admin-products-table .edit-btn:hover {
+  background: #125ea6;
+}
+.admin-products-table .delete-btn:hover {
+  background: #b71c1c;
+}
