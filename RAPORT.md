@@ -1,7 +1,7 @@
 # Sklep internetowy
 
 **Autor**: Michał Marciniak  
-**Data**: Czerwiec 2025
+**Data**: Czerwiec 2025  
 **Repozytorium**: [Github](https://github.com/Mkkami/SklepInternetowy)
 
 ---
