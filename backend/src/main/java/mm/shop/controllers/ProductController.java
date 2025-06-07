@@ -98,4 +98,13 @@ public class ProductController {
         productService.deleteProduct(product);
         return ResponseEntity.ok("Produkt został usunięty pomyślnie");
     }
+
+    @DeleteMapping("/product/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> deleteProduct(@RequestAttribute ("productId") Long productId, Principal principal) {
+        Product product = productService.getProductById(productId);
+        stripeService.removeProduct(product);
+        productService.deleteProduct(product);
+        return ResponseEntity.ok("Produkt został usunięty pomyślnie");
+    }
 }

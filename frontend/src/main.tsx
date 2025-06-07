@@ -8,6 +8,8 @@ import Login from "./pages/Login.tsx";
 import Cart from "./pages/Cart.tsx";
 import CreateProduct from "./pages/CreateProduct.tsx";
 import ProtectedRoute from "./services/ProtectedRoute.tsx";
+import AdminPanel from "./pages/AdminPanel.tsx";
+import AdminProducts from "./pages/AdminProducts.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -23,6 +25,18 @@ createRoot(document.getElementById("root")!).render(
           element={
             <ProtectedRoute requiredRole="ROLE_ADMIN">
               <CreateProduct />
+            </ProtectedRoute>}/>
+        <Route
+          path="/admin-panel"
+          element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <AdminPanel />
+            </ProtectedRoute>}/>
+            <Route
+          path="/admin-panel/products"
+          element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <AdminProducts />
             </ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>

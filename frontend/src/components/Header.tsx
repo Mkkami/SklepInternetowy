@@ -33,7 +33,7 @@ const Header = () => {
         <Link to="/">
           <img src={homeIcon} className="home-icon" alt="Home" />
         </Link>
-        {isAdmin && <Link to="/create-product">Nowy produkt</Link>}
+        {isAdmin && <Link to="/admin-panel">Panel administratora</Link>}
         <div className="profile-items">
           <Link to="/login" id="login-icon">
             <img src={userIcon} className="account-icon" alt="Account" />

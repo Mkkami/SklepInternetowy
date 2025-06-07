@@ -2,6 +2,7 @@
 
 **Autor**: Michał Marciniak  
 **Data**: Czerwiec 2025
+**Repozytorium**: [Github](https://github.com/Mkkami/SklepInternetowy)
 
 ---
 
@@ -9,7 +10,7 @@
 
 ### Cel projektu
 
-Celem projektu było stworzenie funkcjonalnej aplikacji webowej - sklepu internetowego, umożliwiającej użytkownikom przeglądanie i zakup elektroniki, a administratorowi - dodawanie produktów.
+Celem projektu było stworzenie funkcjonalnej aplikacji webowej - sklepu internetowego, umożliwiającej użytkownikom przeglądanie i zakup elektroniki, a administratorowi - zarządzanie produktami.
 
 ### Zakres funkcjonalny
 
@@ -18,7 +19,7 @@ Celem projektu było stworzenie funkcjonalnej aplikacji webowej - sklepu interne
 - Dodawanie produktów do koszyka  
 - Składanie zamówień  
 - Zarządzanie produktami  
-- Responsywny interfejs  
+- Interfejs użytkownika  
 
 ---
 
@@ -55,7 +56,7 @@ Aplikacja składa się z 2 głównych części:
 - Widok szczegółów produktów  
 - Koszyk i płatności (Stripe)  
 - Logowanie i rejestracja  
-- Panel administratora - dodawanie i edycja produktów  
+- Panel administratora - zarządzanie produktami
 
 ### Backend
 
@@ -74,14 +75,12 @@ Aplikacja składa się z 2 głównych części:
 - Logowanie i rejestracja z wykorzystaniem JWT  
 - Obsługa koszyka i płatności  
 - Interfejs użytkownika  
-- Dodawanie produktów z interfejsu  
+- Panel administratora  
 - REST API do historii zamówień i obsługi produktów  
 
 ### Do zrobienia:
-
-- Pełny interfejs panelu administratora i historii zamówień
-- Widok opisu produktu  
-
+- Widok opisu produktów i historii zamówień
+- Edycja informacji o produktach 
 ---
 
 ## Zrzuty ekranu
@@ -92,16 +91,31 @@ Aplikacja składa się z 2 głównych części:
 ![Okno rejestracji](img/rejestracja.png)  
 *Rysunek 2: Okno rejestracji*
 
-![Strona główna zalogowanego użytkownika](img/zalogowany.png)  
-*Rysunek 3: Strona główna zalogowanego użytkownika*
+![Okno rejestracji](img/logowanie.png)  
+*Rysunek 3: Okno logowania*
 
-![Strona główna właściciela](img/wlasciciel.png)  
-*Rysunek 4: Strona główna właściciela (opcja dodania produktu)*
+![Strona główna zalogowanego użytkownika](img/zalogowany.png)  
+*Rysunek 4: Strona główna zalogowanego użytkownika*
+
+![Strona główna właściciela](img/admin.png)  
+*Rysunek 5: Strona główna właściciela (dostępny panel administratora)*
+
+![Panel administratora](img/paneladmin.png)  
+*Rysunek 6: Panel administratora*
+
+![Strona główna właściciela](img/produktyadmin.png)  
+*Rysunek 7: Panel zarządzania produktami*
 
 ![Koszyk z produktami](img/koszyk.png)  
-*Rysunek 5: Koszyk z produktami*
+*Rysunek 8: Koszyk z produktami*
 
 ![Okno płatności](img/płatność.png)  
-*Rysunek 6: Okno płatności*
+*Rysunek 9: Okno płatności*
 
+![Stripe](img/stripe.png)  
+*Rysunek 10: Test płatności w stripe*
 
+## Podsumowanie
+Projekt sklepu internetowego został zrealizowany z powodzeniem w zakresie założeń funkcjonalnych. Udało się stworzyć działającą aplikację webową z interfejsem użytkownika, autoryzacją opartą na JWT, obsługą koszyka, panelu administratora oraz integracją z systemem Stripe.
+Jest kilka obszarów wymagających dalszego rozwoju, takich jak szczegółowy widok produktu czy możliwość edycji informajci o produktach.
+Projekt pozwolił na stworzenie aplikacji webowej oraz zdobycie wiedzy w zakresie projektowania architektury aplikacji, integracji z zewnętrzymi usługami oraz zarządzania dostępem użytkowników.
